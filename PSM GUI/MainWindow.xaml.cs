@@ -25,14 +25,32 @@ namespace PSM_GUI
             InitializeComponent();
         }
 
+        private void btn_click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtB_Login(object sender, TextChangedEventArgs e)
+        {
+
+        }
 
         private void btn_Kalkulation(object sender, RoutedEventArgs e)
         {
 
         }
 
+        private void btn_Nachkalkulation(object sender, RoutedEventArgs e)
+        {
 
-        private void txtB_Login(object sender, TextChangedEventArgs e)
+        }
+
+        private void btn_Gehaltsermittlung(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtb_calculation(object sender, TextChangedEventArgs e)
         {
 
         }
