@@ -1,0 +1,23 @@
+﻿<Window x:Class="PSM_Task_GUi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PSM_Task_GUi"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Height="43" Margin="90,100,0,0" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" FontSize="24"/>
+        <TextBox HorizontalAlignment="Left" Margin="203,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="465" Height="43" FontSize="22" AutomationProperties.Name="txtb_name" TextChanged="txtb_name"/>
+        <TextBlock HorizontalAlignment="Left" Margin="90,167,0,0" Text="Datum" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="43" FontSize="22"/>
+        <TextBlock HorizontalAlignment="Left" Margin="203,165,0,0" Text="Auftrag" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="43" FontSize="22"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,36,0,0" Text="Tätigkeitsnachweis" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36"/>
+        <TextBlock HorizontalAlignment="Left" Margin="350,165,0,0" Text="Tätigkeit" TextWrapping="Wrap" VerticalAlignment="Top" Width="318" Height="43" FontSize="22"/>
+        <TextBlock HorizontalAlignment="Left" Margin="673,167,0,0" Text="Stunden" TextWrapping="Wrap" VerticalAlignment="Top" Height="41" Width="90" FontSize="22"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="673,100,0,0" VerticalAlignment="Top" Width="90" Height="43" FontSize="22" AutomationProperties.Name="btn_login" Click="btn_login"/>
+        <TextBox HorizontalAlignment="Left" Margin="90,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="142" FontSize="16" TextChanged="txt_date" AutomationProperties.Name="txtb_date"/>
+        <TextBox HorizontalAlignment="Left" Margin="203,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142" Height="142" AutomationProperties.Name="txtb_order" FontSize="18" TextChanged="txtb_order"/>
+        <TextBox HorizontalAlignment="Left" Margin="350,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="318" Height="142" FontSize="20" AutomationProperties.Name="txtb_task" TextChanged="txtb_task"/>
+        <TextBox HorizontalAlignment="Left" Margin="673,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="142" AutomationProperties.Name="txtb_hours" FontSize="16" TextChanged="txtb_hours"/>
+    </Grid>
+</Window>
