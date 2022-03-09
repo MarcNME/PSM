@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSM_importer", "PSM_importer\PSM_importer.csproj", "{F1F88F80-01BA-4D22-8637-E5D99E2FF3AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSM-Libary", "PSM-Libary\PSM-Libary.csproj", "{1F6D99F3-EFDF-4B59-93BA-25C41D8495C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSM-Library", "PSM-Library\PSM-Library.csproj", "{1F6D99F3-EFDF-4B59-93BA-25C41D8495C1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSM GUI", "PSM GUI\PSM GUI.csproj", "{A93FA662-512B-4700-BF91-A1D1CC2F79D5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSM Task GUi", "PSM Task GUi\PSM Task GUi.csproj", "{422E660F-1081-4B12-B469-D8DD871597E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryTests", "LibraryTests\LibraryTests.csproj", "{6F2E02BE-5D2A-4A43-B89A-E37A1CFE4F12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{1F6D99F3-EFDF-4B59-93BA-25C41D8495C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1F88F80-01BA-4D22-8637-E5D99E2FF3AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F1F88F80-01BA-4D22-8637-E5D99E2FF3AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F2E02BE-5D2A-4A43-B89A-E37A1CFE4F12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F2E02BE-5D2A-4A43-B89A-E37A1CFE4F12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F2E02BE-5D2A-4A43-B89A-E37A1CFE4F12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F2E02BE-5D2A-4A43-B89A-E37A1CFE4F12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
