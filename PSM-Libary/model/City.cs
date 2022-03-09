@@ -7,13 +7,5 @@
         public string Name { get; set; }
         public string Addition { get; set; }
         public string Prefix { get; set; }
-
-        public City(string plz, string name, string addition, string prefix)
-        {
-            this.Plz = plz;
-            this.Name = name;
-            this.Addition = addition;
-            this.Prefix = prefix;
-        }
     }
 }
