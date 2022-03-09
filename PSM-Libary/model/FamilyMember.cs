@@ -11,6 +11,7 @@
     {
         public int Id { get; set; }
         public Relation Relation { get; set; }
+        public string Description { get; set; }
         public int Contribution { get; set; }
         public string FirstName { get; set; }
     }
