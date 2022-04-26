@@ -17,7 +17,6 @@ namespace PSM
             Taetigkeiten taetigkeiten = (Taetigkeiten)serializer.Deserialize(reader, typeof(Taetigkeiten));
             reader.Close();
             return taetigkeiten;
-
         }
     }
 }
