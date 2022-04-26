@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using PSM_Libary.Connectors;
 using PSM_Libary.model;
 
@@ -11,14 +12,26 @@ namespace PSM_Libary
 
         public DbAdapter()
         {
-            _connector = new MySQLConnector("PSM", "localhost", "pma", "pma");
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            _connector = new MySQLConnector("psm", "localhost", "psm", "psm");
+        }
+
+        public DbAdapter(string dbName, string dbHost, string dbUser, string dbPassword)
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            _connector = new MySQLConnector(dbName, dbHost, dbUser, dbPassword);
+        }
+
+        public bool TestDbConnection()
+        {
+            return _connector.TestConnection();
         }
 
         public List<FamilyMember> GetFamilyMembers(int employeeId)
         {
             var sql = "SELECT memberID, relation, description, contribution, firstName " +
-                      "FROM tblfamilymembers JOIN tblreations ON tblfamilymembers.memberID = tblreations.fk_familymeberId " +
-                      $"WHERE tblreations.fk_employeeId = {employeeId}";
+                      "FROM tblfamilymembers " +
+                      $"WHERE employeeId = {employeeId}";
 
             var reader = _connector.ExecuteQuery(sql);
 
@@ -29,11 +42,13 @@ namespace PSM_Libary
                 var familyMember = new FamilyMember
                 {
                     Id = (int) reader["memberID"],
-                    Relation = (Relation) reader["relation"],
                     Description = (string) reader["description"],
                     Contribution = (int) reader["contribution"],
                     FirstName = (string) reader["firstName"]
                 };
+
+                familyMember.Relation = (Relation) reader["relation"];
+                
                 familyMembers.Add(familyMember);
             }
 
@@ -50,25 +65,25 @@ namespace PSM_Libary
             {
                 Id = (int) reader["departmentID"],
                 Name = (string) reader["name"],
-                DepartmentHeadId = (int) reader["departmentHeadID"],
+                DepartmentHeadName = (string) reader["departmentHeadName"],
+                DepartmentHeadLastName = (string) reader["departmentHeadLastName"],
             };
             _connector.CloseConnection();
             return department;
         }
 
-        public City GetCity(int cityId)
+        public City GetCity(int cityPlz)
         {
-            var sql = $"SELECT * FROM tblcity WHERE id = {cityId}";
+            var sql = $"SELECT * FROM tblcity WHERE plz = {cityPlz}";
             var reader = _connector.ExecuteQuery(sql);
 
             reader.Read();
 
             var city = new City
             {
-                Id = (int) reader["id"],
                 Plz = (string) reader["plz"],
                 Name = (string) reader["name"],
-                Addition = (string) reader["addition"],
+                Vorwahl = (string) reader["vorwahl"],
                 Prefix = (string) reader["prefix"],
             };
             _connector.CloseConnection();
@@ -83,22 +98,31 @@ namespace PSM_Libary
             var employees = new List<Employee>();
             while (reader.Read())
             {
-                var employee = new Employee
+                var employee = new Employee();
+                
+                employee.Id = (int) reader["employeeID"];
+                employee.FirstName = (string) reader["firstName"];
+                employee.LastName = (string) reader["lastName"];
+                employee.Address = (string) reader["phoneNumber"];
+                employee.BaseSalary = (int) reader["baseSalary"];
+                employee.Birthday = DateTime.Parse((string) reader["birthday"]);
+                employee.EntryDate = DateTime.Parse((string) reader["entryDate"]);
+                
+                Enum.TryParse((string) reader["gender"], out Gender gender);
+                employee.Gender = gender;
+
+                if (reader["departmentID"] != System.DBNull.Value)
                 {
-                    Id = (int) reader["employeeID"],
-                    FirstName = (string) reader["firstName"],
-                    LastName = (string) reader["lastName"],
-                    Gender = (Gender) reader["gender"],
-                    Birthday = DateTime.Parse((string) reader["birthday"]),
-                    Address = (string) reader["phoneNumber"],
-                    EntryDate = DateTime.Parse((string) reader["entryDate"]),
-                    BaseSalary = (int) reader["baseSalary"],
-                    Department = GetDepartment((int) reader["departmentID"]),
-                };
+                    employee.Department = GetDepartment((int) reader["departmentID"]);
+                }
 
+                if (reader["plz"] != System.DBNull.Value)
+                {
+                    employee.City = GetCity((int) reader["plz"]);
+                }
+                
                 employee.FamilyMembers = GetFamilyMembers(employee.Id);
-                employee.City = GetCity((int) reader["cityId"]);
-
+                
                 employees.Add(employee);
             }
 
@@ -143,13 +167,13 @@ namespace PSM_Libary
 
         public Report GetReport(int reportId)
         {
-            var sql = $"SELECT * FROM tblreations WHERE id = {reportId}";
+            var sql = $"SELECT * FROM tblreports WHERE id = {reportId}";
             var reader = _connector.ExecuteQuery(sql);
 
             reader.Read();
             var report = new Report
             {
-                Id = (int) reader["orderID"],
+                Id = (int) reader["reportID"],
                 Date = (DateTime) reader["date"],
                 Hours = (double) reader["hours"],
                 OrderId = (int) reader["orderID"],
@@ -163,8 +187,8 @@ namespace PSM_Libary
         
         public int AddEmployee(Employee employee)
         {
-            var dml = "INSERT INTO tblemployees (firstName, lastName, gender, birthday, cityId, address, phoneNumber, entryDate, baseSalary, departmentID) " +
-                      $" VALUES ({employee.FirstName},{employee.LastName},{employee.Gender},{employee.Birthday},{employee.City.Id}," +
+            var dml = "INSERT INTO tblemployees (firstName, lastName, gender, birthday, plz, address, phoneNumber, entryDate, baseSalary, departmentID) " +
+                      $" VALUES ({employee.FirstName},{employee.LastName},{employee.Gender},{employee.Birthday},{employee.City.Plz}," +
                       $"{employee.Address},{employee.Phonenumber},{employee.EntryDate},{employee.BaseSalary},{employee.Department.Id});";
             return _connector.ExecuteNonQuery(dml);
         }
@@ -178,14 +202,14 @@ namespace PSM_Libary
         public int AddCity(City city)
         {
             var dml =
-                $"INSERT INTO tblcity(plz, name, addition, prefix) VALUES ({city.Plz}, {city.Name}, {city.Addition}, {city.Prefix})";
+                $"INSERT INTO tblcity(plz, name, vorwahl, prefix) VALUES ({city.Plz}, {city.Name}, {city.Vorwahl}, {city.Prefix})";
             return _connector.ExecuteNonQuery(dml);
         }
 
         public int AddDepartment(Department dep)
         {
             var dml =
-                $"INSERT INTO tbldepartmens(departmentName, departmentHeadID) VALUES ({dep.Name}, {dep.DepartmentHeadId})";
+                $"INSERT INTO tbldepartmens(departmentName, departmentHeadName, departmentHeadLastName) VALUES ({dep.Name}, {dep.DepartmentHeadName}, {dep.DepartmentHeadLastName})";
             return _connector.ExecuteNonQuery(dml);
         }
 
