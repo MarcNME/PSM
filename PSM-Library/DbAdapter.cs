@@ -147,6 +147,28 @@ namespace PSM_Libary
             return activity;
         }
 
+        public List<Activity> GetActivitys()
+        {
+            const string sql = "SELECT * FROM tblactivity";
+            var reader = _connector.ExecuteQuery(sql);
+
+            var activitys = new List<Activity>();
+            while (reader.Read())
+            {
+                var activity = new Activity
+                {
+                    Id = (int) reader["activityID"],
+                    Description = (string) reader["description"],
+                    Price = (int) reader["price"]
+                };
+
+                activitys.Add(activity);
+            }
+
+            _connector.CloseConnection();
+            return activitys;
+        }
+
         public Order GetOrder(int orderId)
         {
             var sql = $"SELECT * FROM tblorders WHERE orderID = {orderId}";
@@ -165,6 +187,29 @@ namespace PSM_Libary
             return order;
         }
 
+        public List<Order> GetOrders()
+        {
+            const string sql = "SELECT * FROM tblorders";
+            var reader = _connector.ExecuteQuery(sql);
+
+            var orders = new List<Order>();
+
+            while (reader.Read())
+            {
+                var order = new Order
+                {
+                    Id = (int) reader["orderID"],
+                    Value = (int) reader["value"],
+                    PayDate = DateTime.Parse((string) reader["payDate"]),
+                    Customer = (string) reader["customer"]
+                };
+
+                orders.Add(order);
+            }
+
+            return orders;
+        }
+        
         public Report GetReport(int reportId)
         {
             var sql = $"SELECT * FROM tblreports WHERE id = {reportId}";
@@ -229,7 +274,7 @@ namespace PSM_Libary
         public int AddReport(Report report)
         {
             var dml = $"INSERT INTO tblreports (Date, orderID, activityID, hours, employeeID) " +
-                      $"VALUES ({report.Date}, {report.OrderId}, {report.ActivityId}, {report.Hours}, {report.EmployeeId})";
+                      $"VALUES ({report.Date:yyyy-MM-dd}, {report.OrderId}, {report.ActivityId}, {report.Hours}, {report.EmployeeId})";
             return _connector.ExecuteNonQuery(dml);
         }
 
