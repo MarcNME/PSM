@@ -23,5 +23,10 @@ namespace PSM_Libary.model
         public City City { get; set; }
         public string Address { get; set; }
         public DateTime EntryDate { get; set; }
+
+        public override string ToString()
+        {
+            return FirstName + " " + LastName;
+        }
     }
 }

@@ -7,17 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Height="43" Margin="90,100,0,0" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" FontSize="24"/>
+        <TextBlock HorizontalAlignment="Left" Height="43" Margin="90,100,0,0" Text="ID:" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" FontSize="24"/>
         <TextBlock HorizontalAlignment="Left" Margin="90,167,0,0" Text="Datum" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="43" FontSize="22"/>
         <TextBlock HorizontalAlignment="Left" Margin="203,165,0,0" Text="Auftrag" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="43" FontSize="22"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,36,0,0" Text="Tätigkeitsnachweis" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36"/>
         <TextBlock HorizontalAlignment="Left" Margin="350,165,0,0" Text="Tätigkeit" TextWrapping="Wrap" VerticalAlignment="Top" Width="318" Height="43" FontSize="22"/>
         <TextBlock HorizontalAlignment="Left" Margin="673,167,0,0" Text="Stunden" TextWrapping="Wrap" VerticalAlignment="Top" Height="41" Width="90" FontSize="22"/>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="673,100,0,0" VerticalAlignment="Top" Width="90" Height="43" FontSize="22" AutomationProperties.Name="btn_save" Click="btn_save_OnClick"/>
-        <TextBox HorizontalAlignment="Left" Margin="90,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="142" FontSize="16" AutomationProperties.Name="txtb_date"/>
-        <TextBox HorizontalAlignment="Left" Margin="203,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142" Height="142" AutomationProperties.Name="txtb_order" FontSize="18" />
-        <TextBox HorizontalAlignment="Left" Margin="350,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="318" Height="142" FontSize="20" AutomationProperties.Name="txtb_task" />
-        <TextBox HorizontalAlignment="Left" Margin="673,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="142" AutomationProperties.Name="txtb_hours" FontSize="16" />
+        <Button Content="Save" HorizontalAlignment="Left" Margin="673,100,0,0" VerticalAlignment="Top" Width="90" Height="43" FontSize="22" Name="btn_save" Click="btn_save_OnClick"/>
+        <DatePicker Name="DatePicker" HorizontalAlignment="Left" Margin="80,130,0,0"  Width="108" Height="142" FontSize="16"></DatePicker>
+        <ComboBox Name="CbxOrders" HorizontalAlignment="Left" Margin="203,217,0,0" VerticalAlignment="Top" Width="142" Height="142"/>
+        <ComboBox Name="CbxActivity" HorizontalAlignment="Left" Margin="350,217,0,0" VerticalAlignment="Top" Width="318" Height="142" FontSize="20" />
+        <TextBox HorizontalAlignment="Left" Margin="673,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="142" Name="txtb_hours" FontSize="16" />
         <ComboBox Name="CbxEmployees" HorizontalAlignment="Center" Height="24" Margin="0,108,0,0" VerticalAlignment="Top" Width="396" d:ItemsSource="{d:SampleData ItemCount=5}"/>
     </Grid>
 </Window>

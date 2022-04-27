@@ -1,53 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Data;
 using PSM_Libary;
 using PSM_Libary.model;
 
 namespace PSM_Task_GUi
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    /// Author: Marc Enzmann
     public partial class MainWindow : Window
     {
         private DbAdapter _adapter;
         private List<Employee> _employees;
+        private List<Order> _orders;
+        private List<Activity> _activities;
         public MainWindow()
         {
             InitializeComponent();
-            _adapter = new DbAdapter("psm", "127.0.0.1", "psm", "psm");
+            _adapter = new DbAdapter("psm", "127.0.0.1", "root", "");
 
             if (!_adapter.TestDbConnection())
             {
                 Console.Error.WriteLine("DB couldn't connect");
             }
             
-            _employees = _adapter.GetEmployees();
-            
-            RefreshEmployees();
-
-            CbxEmployees.SelectedIndex = 0;
+            Refresh();
         }
 
-        private void RefreshEmployees()
+        private void Refresh()
         {
-            Dictionary<int, string> dict = new Dictionary<int, string>();
+            _employees = _adapter.GetEmployees();
+            _orders = _adapter.GetOrders();
+            _activities = _adapter.GetActivitys();
+            
+            CbxEmployees.Items.Clear();
+            CbxOrders.Items.Clear();
+            CbxActivity.Items.Clear();
+            
             foreach (var employee in _employees)
             {
-                dict.Add(employee.Id, employee.FirstName + " " + employee.LastName);
+                CbxEmployees.Items.Add(employee);
             }
 
-            //CbxEmployees.SelectedValue = new Binding(dict);
+            foreach (var order in _orders)
+            {
+                CbxOrders.Items.Add(order);
+            }
+
+            foreach (var activity in _activities)
+            {
+                CbxActivity.Items.Add(activity);
+            }
         }
+
+
 
 
         private void btn_save_OnClick(object sender, RoutedEventArgs e)
         {
-            Report report = new Report
+            if (CbxEmployees.SelectedIndex == -1 || CbxActivity.SelectedIndex == -1 || CbxOrders.SelectedIndex == -1 ||
+                txtb_hours.Text == "")
             {
-            };
+                MessageBox.Show("Please enter a value for every field");
+                return;
+            }
+            
+            Report report = new Report();
+
+            Employee selected = (Employee) CbxEmployees.SelectionBoxItem;
+            Activity selectedActivity = (Activity) CbxActivity.SelectionBoxItem;
+            Order selectedOrder = (Order) CbxOrders.SelectionBoxItem;
+            
+            report.EmployeeId = selected.Id;
+            report.Date = (DateTime) DatePicker.SelectedDate.GetValueOrDefault();
+            report.ActivityId = selectedActivity.Id;
+            report.OrderId = selectedOrder.Id;
+            report.Hours = int.Parse(txtb_hours.Text);
+
+            _adapter.AddReport(report);
+
+            MessageBox.Show("Saved successfully!");
         }
     }
 }
