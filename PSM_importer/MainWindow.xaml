@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Button x:Name="btn_Datenladen" Content="Load Data" HorizontalAlignment="Left" Margin="381,74,0,0" VerticalAlignment="Top" Width="97" Height="51" Click="btn_Datenladen_Click"/>
+        <Button x:Name="btn_OpenFolder" Content="Open Folder" HorizontalAlignment="Left" Margin="36,74,0,0" VerticalAlignment="Top" Width="135" Height="51"/>
+        <Label x:Name="lbl_FolderName" Content="" HorizontalAlignment="Left" Margin="171,74,0,0" VerticalAlignment="Top" Height="51" Width="84"/>
+
     </Grid>
 </Window>
