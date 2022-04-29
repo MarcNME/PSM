@@ -5,18 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
+using PSM_Libary.model;
 
 namespace PSM
 {
-    class JSONAdapter
+    public class JSONAdapter
     {
-        public Taetigkeiten ReadData(string filename)
+        PSM_Libary.DbAdapter dbAdapter = new PSM_Libary.DbAdapter("psm", "10.1.13.194", "psm", "psm");
+
+        public void ReadData(string filename)
         {
-            StreamReader reader = File.OpenText(filename);
-            JsonSerializer serializer = new JsonSerializer();
-            Taetigkeiten taetigkeiten = (Taetigkeiten)serializer.Deserialize(reader, typeof(Taetigkeiten));
+            string jsonValue;
+            StreamReader reader = new StreamReader(filename);
+            jsonValue = reader.ReadToEnd();
+            Activity activity = JsonConvert.DeserializeObject<Activity>(jsonValue);
+            dbAdapter.AddActivity(activity);
             reader.Close();
-            return taetigkeiten;
         }
     }
 }

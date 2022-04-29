@@ -4,22 +4,22 @@ using System.IO;
 using PSM_Libary.model;
 using LumenWorks.Framework.IO.Csv;
 using System.Data;
+using System.Globalization;
 
 namespace PSM
 {
-    class ExcelAdapter
+    public class ExcelAdapter
     {
-        List<FamilyMember> familyMembers = new List<FamilyMember>();
-        PSM_Libary.DbAdapter dbAdapter = new PSM_Libary.DbAdapter();
+        PSM_Libary.DbAdapter dbAdapter = new PSM_Libary.DbAdapter("psm","10.1.13.194","psm","psm");
 
 
         public void ReadfamilyMemberExcel(string filename)
         {
             var csvTable = new DataTable();
-            using (var csvReader = new CsvReader(new StreamReader(System.IO.File.OpenRead(filename)), true))
-            {
-                csvTable.Load(csvReader);
-            }
+            StreamReader streamReader = new StreamReader(filename);
+            CsvReader csvReader = new CsvReader(streamReader, false, ';');
+            streamReader.ReadLine();
+            csvTable.Load(csvReader);
             FamilyMember fMbr;
             for (int i = 0; i < csvTable.Rows.Count; i++)
             {
@@ -31,14 +31,15 @@ namespace PSM
                 fMbr.FirstName = csvTable.Rows[i][4].ToString();
                 dbAdapter.AddFamilyMember(fMbr);
             }
+            streamReader.Close();
         }
         public void ReadOrderExcel(string filename)
         {
             var csvTable = new DataTable();
-            using (var csvReader = new CsvReader(new StreamReader(System.IO.File.OpenRead(filename)), true))
-            {
-                csvTable.Load(csvReader);
-            }
+            StreamReader streamReader = new StreamReader(filename);
+            CsvReader csvReader = new CsvReader(streamReader, false, ';');
+            streamReader.ReadLine();
+            csvTable.Load(csvReader);
             Order order;
             for (int i = 0; i < csvTable.Rows.Count; i++)
             {
@@ -49,14 +50,16 @@ namespace PSM
                 order.Customer = csvTable.Rows[i][3].ToString();
                 dbAdapter.AddOrder(order);
             }
+            streamReader.Close();
         }
+
         public void ReadReportExcel(string filename)
         {
             var csvTable = new DataTable();
-            using (var csvReader = new CsvReader(new StreamReader(System.IO.File.OpenRead(filename)), true))
-            {
-                csvTable.Load(csvReader);
-            }
+            StreamReader streamReader = new StreamReader(filename);
+            CsvReader csvReader = new CsvReader(streamReader, false, ';');
+            streamReader.ReadLine();
+            csvTable.Load(csvReader);
             Report report;
 
             for (int i = 0; i < csvTable.Rows.Count; i++)
@@ -69,25 +72,26 @@ namespace PSM
                 report.Hours = Int32.Parse(csvTable.Rows[i][4].ToString());
                 dbAdapter.AddReport(report);
             }
+            streamReader.Close();
         }
         public void ReadPersonalExcel(string filename)
         {
             var csvTable = new DataTable();
-            using (var csvReader = new CsvReader(new StreamReader(System.IO.File.OpenRead(filename)), true))
-            {
-                csvTable.Load(csvReader);
-            }
+            StreamReader streamReader = new StreamReader(filename);
+            CsvReader csvReader = new CsvReader(streamReader, false, ';');
+            streamReader.ReadLine();
+            csvTable.Load(csvReader);
             Employee employee;
 
             for (int i = 0; i < csvTable.Rows.Count; i++)
             {
                 employee = new Employee();
                 employee.Id = Int32.Parse(csvTable.Rows[i][0].ToString());
-                employee.LastName = csvTable.Rows[i][1].ToString();
-                employee.FirstName = csvTable.Rows[i][2].ToString();
+                employee.FirstName = csvTable.Rows[i][1].ToString();
+                employee.LastName = csvTable.Rows[i][2].ToString();
                 employee.Gender = (Gender)Enum.Parse(typeof(Gender), csvTable.Rows[i][3].ToString());
                 employee.Birthday = DateTime.Parse(csvTable.Rows[i][4].ToString());
-                employee.City.Id = Int32.Parse(csvTable.Rows[i][5].ToString());
+                employee.City.Plz = csvTable.Rows[i][5].ToString();
                 employee.Address = csvTable.Rows[i][6].ToString();
                 employee.Phonenumber = csvTable.Rows[i][7].ToString();
                 employee.EntryDate = DateTime.Parse(csvTable.Rows[i][8].ToString());
@@ -95,6 +99,7 @@ namespace PSM
                 employee.Department.Id = Int32.Parse(csvTable.Rows[i][10].ToString());
                 dbAdapter.AddEmployee(employee);
             }
+            streamReader.Close();
         }
     }
 }

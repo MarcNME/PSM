@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int DepartmentHeadId { get; set; }
+        public string DepartmentHeadName { get; set; }
+        public string DepartmentHeadLastName { get; set; }
     }
 }
