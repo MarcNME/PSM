@@ -7,15 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Kalkulation" HorizontalAlignment="Left" Margin="38,337,0,0" VerticalAlignment="Top" Height="46" Width="134" Click="btn_Kalkulation" AutomationProperties.Name="btn_calculation" FontSize="18"/>
-        <Button Content="Nachkalkulation" HorizontalAlignment="Center" Margin="0,337,0,0" VerticalAlignment="Top" Height="46" Width="136" Click="btn_Nachkalkulation" AutomationProperties.Name="btn_postCalculation" FontSize="18"/>
-        <Button Content="Gehaltsermittlung" HorizontalAlignment="Left" Margin="580,337,0,0" VerticalAlignment="Top" Height="46" Width="131" Click="btn_Gehaltsermittlung" AutomationProperties.Name="btn_calculateSalary" FontSize="16"/>
-        <Label Content="" HorizontalAlignment="Left" Margin="38,252,0,0" VerticalAlignment="Top" Width="134" Height="49" AutomationProperties.Name="lbl_Kalkulation"/>
-        <Label Content="" HorizontalAlignment="Center" Margin="0,252,0,0" VerticalAlignment="Top" Width="136" Height="49" AutomationProperties.Name="lbl_NachKklkulation"/>
-        <Label Content="" HorizontalAlignment="Left" Margin="580,252,0,0" VerticalAlignment="Top" Height="49" Width="131" AutomationProperties.Name="lbl_Gehaltsermittlung"/>
-        <TextBox HorizontalAlignment="Left" Margin="38,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" TextChanged="txtB_Login" Height="55" FontSize="20"/>
-        <Button Content="Login" HorizontalAlignment="Left" Margin="216,105,0,0" VerticalAlignment="Top" Height="55" Width="134" FontSize="18" Click="btn_click"/>
-        <TextBox HorizontalAlignment="Center" Margin="0,30,0,0" Text="Kalkulationen" TextWrapping="Wrap" VerticalAlignment="Top" Width="452" Height="55" FontSize="36" TextChanged="txtb_calculation" TextAlignment="Center"/>
-
+        <TextBox HorizontalAlignment="Center" Margin="0,30,0,0" Text="Kalkulationen" TextWrapping="Wrap" VerticalAlignment="Top" Width="450" Height="55" FontSize="36" TextChanged="txtb_calculation" TextAlignment="Center"/>
+        <Button Content="Kalkulation" HorizontalAlignment="Left" Margin="38,337,0,0" VerticalAlignment="Top" Height="45" Width="130" Click="btn_Kalkulation" AutomationProperties.Name="btn_calculation" FontSize="18"/>
+        <Button Content="Nachkalkulation" HorizontalAlignment="Center" Margin="0,337,0,0" VerticalAlignment="Top" Height="45" Width="130" Click="btn_Nachkalkulation" AutomationProperties.Name="btn_postCalculation" FontSize="18"/>
+        <Button Content="Gehaltsermittlung" HorizontalAlignment="Left" Margin="580,337,0,0" VerticalAlignment="Top" Height="45" Width="130" Click="btn_Gehaltsermittlung" AutomationProperties.Name="btn_calculateSalary" FontSize="16"/>
+        <Label HorizontalAlignment="Left" Margin="38,252,0,0" VerticalAlignment="Top" Width="130" Height="45" Name="lbl_Kalkulation"/>
+        <Label HorizontalAlignment="Center" Margin="0,252,0,0" VerticalAlignment="Top" Width="130" Height="45" Name="lbl_NachKklkulation"/>
+        <Label HorizontalAlignment="Left" Margin="581,252,0,0" VerticalAlignment="Top" Width="130" Height="45" Name="lbl_Gehaltsermittlung"/>
+        <ComboBox Name="CbxEmployees" Margin="580,180,89,0" VerticalAlignment="Top" Height="30" RenderTransformOrigin="0.494,3.078" />
+        <Label Content="Mitarbeiter:" HorizontalAlignment="Left" Margin="580,150,0,0" VerticalAlignment="Top" Height="25" Width="130"/>
     </Grid>
 </Window>

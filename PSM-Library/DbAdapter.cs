@@ -220,7 +220,7 @@ namespace PSM_Libary
             {
                 Id = (int) reader["reportID"],
                 Date = (DateTime) reader["date"],
-                Hours = (double) reader["hours"],
+                Hours = (int) reader["hours"],
                 OrderId = (int) reader["orderID"],
                 ActivityId = (int) reader["activityID"],
                 EmployeeId = (int) reader["employeeID"]
@@ -229,7 +229,34 @@ namespace PSM_Libary
             _connector.CloseConnection();
             return report;
         }
-        
+
+        public List<Report> GetAllReportsForEmployee(int employeeId)
+        {
+            var sql = $"SELECT * FROM tblreports WHERE employeeID = {employeeId}";
+            var reader = _connector.ExecuteQuery(sql);
+
+            var reports = new List<Report>();
+            
+            while(reader.Read())
+            {
+                var report = new Report
+                {
+                    Id = (int) reader["reportID"],
+                    Hours = (int) reader["hours"],
+                    OrderId = (int) reader["orderID"],
+                    ActivityId = (int) reader["activityID"],
+                    EmployeeId = (int) reader["employeeID"]
+                };
+
+                report.Date = DateTime.Parse((string) reader["date"]);
+                
+                reports.Add(report);
+            }
+            
+            _connector.CloseConnection();
+            return reports;
+        }
+
         public int AddEmployee(Employee employee)
         {
             var dml = "INSERT INTO tblemployees (firstName, lastName, gender, birthday, plz, address, phoneNumber, entryDate, baseSalary, departmentID) " +
