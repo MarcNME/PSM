@@ -71,7 +71,12 @@ namespace PSM_Task_GUi
             Order selectedOrder = (Order) CbxOrders.SelectionBoxItem;
             
             report.EmployeeId = selected.Id;
-            report.Date = (DateTime) DatePicker.SelectedDate.GetValueOrDefault();
+            if (!DatePicker.SelectedDate.HasValue)
+            {
+                MessageBox.Show("Please enter a date");
+                return;
+            }
+            report.Date = DatePicker.SelectedDate.Value;
             report.ActivityId = selectedActivity.Id;
             report.OrderId = selectedOrder.Id;
             report.Hours = int.Parse(txtb_hours.Text);

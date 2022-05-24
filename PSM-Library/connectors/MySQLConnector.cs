@@ -74,7 +74,7 @@ namespace PSM_Libary.Connectors
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine("C# is so ein dreckiges scheiß ding");
+                Console.Error.WriteLine(ex.Message);
                 return false;
             }
         }

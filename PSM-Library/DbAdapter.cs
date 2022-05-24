@@ -301,7 +301,7 @@ namespace PSM_Libary
         public int AddReport(Report report)
         {
             var dml = $"INSERT INTO tblreports (Date, orderID, activityID, hours, employeeID) " +
-                      $"VALUES ({report.Date:yyyy-MM-dd}, {report.OrderId}, {report.ActivityId}, {report.Hours}, {report.EmployeeId})";
+                      $"VALUES ('{report.Date:yyyy-MM-dd}', {report.OrderId}, {report.ActivityId}, {report.Hours}, {report.EmployeeId})";
             return _connector.ExecuteNonQuery(dml);
         }
 
