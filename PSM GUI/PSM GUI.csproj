@@ -16,4 +16,8 @@
     <ProjectReference Include="..\PSM-Library\PSM-Library.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PSM-Library\PSM-Library.csproj" />
+  </ItemGroup>
+
 </Project>

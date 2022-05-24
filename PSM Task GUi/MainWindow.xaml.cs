@@ -16,7 +16,7 @@ namespace PSM_Task_GUi
         public MainWindow()
         {
             InitializeComponent();
-            _adapter = new DbAdapter("psm", "127.0.01", "psm", "psm");
+            _adapter = new DbAdapter("psm", "127.0.0.1", "psm", "psm");
 
             if (!_adapter.TestDbConnection())
             {
