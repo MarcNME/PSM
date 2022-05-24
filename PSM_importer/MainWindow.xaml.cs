@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 using PSM_Libary.model;
 namespace PSM
 {
@@ -20,42 +21,52 @@ namespace PSM
     /// </summary>
     public partial class MainWindow
     {
-        ExcelAdapter excelAdapter = new ExcelAdapter();
-        JSONAdapter JSONAdapter = new JSONAdapter();
+        ExcelAdapter excelAdapter;
+        JSONAdapter jsonAdapter;
+        OpenFileDialog openFileDialog;
+        
         public MainWindow()
         {
             InitializeComponent();
+            excelAdapter = new ExcelAdapter();
+            jsonAdapter = new JSONAdapter();
+            openFileDialog = new OpenFileDialog();
+        }
+
+        private void btn_OpenFile_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            openFileDialog.ShowDialog();
         }
 
         private void btn_Datenladen_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            string filename = txtBox_Entry.Text;
+            var filename = openFileDialog.FileName;
             
-            if(filename == "tblFamilyMembers.csv")
+            switch (filename)
             {
-                excelAdapter.ReadfamilyMemberExcel(filename);
-                MessageBox.Show("Die Daten wurden eingelesen");
+                case null:
+                    MessageBox.Show("Please select a File first!");
+                    return;
+                case "tblFamilyMembers.csv":
+                    excelAdapter.ReadfamilyMemberExcel(filename);
+                    break;
+                case "tblBericht.csv":
+                    excelAdapter.ReadReportExcel(filename);
+                    break;
+                case "tblAuftrag.csv":
+                    excelAdapter.ReadOrderExcel(filename);
+                    break;
+                case "tblPersonal.csv":
+                    excelAdapter.ReadPersonalExcel(filename);
+                    break;
+                case "Taetigkeiten.json":
+                    jsonAdapter.ReadData(filename);
+                    break;
+                default:
+                    MessageBox.Show("Please select a valid file");
+                    return;
             }
-            if (filename == "tblBericht.csv")
-            {
-                excelAdapter.ReadReportExcel(filename);
-                MessageBox.Show("Die Daten wurden eingelesen");
-            }
-            if (filename == "tblAuftrag.csv")
-            {
-                excelAdapter.ReadOrderExcel(filename);
-                MessageBox.Show("Die Daten wurden eingelesen");
-            }
-            if (filename == "tblPersonal.csv")
-            {
-                excelAdapter.ReadPersonalExcel(filename);
-                MessageBox.Show("Die Daten wurden eingelesen");
-            }
-            if (filename == "Taetigkeiten.json")
-            {
-                JSONAdapter.ReadData(filename);
-                MessageBox.Show("Die Daten wurden eingelesen");
-            }
+            MessageBox.Show("Die Daten wurden eingelesen");
         }
     }
 }

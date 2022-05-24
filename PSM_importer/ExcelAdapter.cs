@@ -10,7 +10,7 @@ namespace PSM
 {
     public class ExcelAdapter
     {
-        PSM_Libary.DbAdapter dbAdapter = new PSM_Libary.DbAdapter("psm","10.1.13.194","psm","psm");
+        PSM_Libary.DbAdapter dbAdapter = new PSM_Libary.DbAdapter("psm","127.0.01","psm","psm");
 
 
         public void ReadfamilyMemberExcel(string filename)
