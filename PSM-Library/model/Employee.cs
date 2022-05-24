@@ -6,7 +6,7 @@ namespace PSM_Libary.model
     public enum Gender
     {
         M, //Male
-        F, //Female
+        W, //Female
         D //Divers
     }
     public class Employee

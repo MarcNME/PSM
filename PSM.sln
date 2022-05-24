@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.32319.34
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSM_importer", "PSM_importer\PSM_importer.csproj", "{F1F88F80-01BA-4D22-8637-E5D99E2FF3AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSM_importer", "PSM_importer\PSM_importer.csproj", "{6FA32E7C-CE64-407B-889F-46C2BCEB3D75}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSM-Library", "PSM-Library\PSM-Library.csproj", "{1F6D99F3-EFDF-4B59-93BA-25C41D8495C1}"
 EndProject
@@ -17,10 +17,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F1F88F80-01BA-4D22-8637-E5D99E2FF3AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1F88F80-01BA-4D22-8637-E5D99E2FF3AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1F88F80-01BA-4D22-8637-E5D99E2FF3AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1F88F80-01BA-4D22-8637-E5D99E2FF3AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FA32E7C-CE64-407B-889F-46C2BCEB3D75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FA32E7C-CE64-407B-889F-46C2BCEB3D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FA32E7C-CE64-407B-889F-46C2BCEB3D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FA32E7C-CE64-407B-889F-46C2BCEB3D75}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1F6D99F3-EFDF-4B59-93BA-25C41D8495C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1F6D99F3-EFDF-4B59-93BA-25C41D8495C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F6D99F3-EFDF-4B59-93BA-25C41D8495C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
